@@ -1,0 +1,199 @@
+===============================jQuery 效果=====================================
+
+===============================隐藏和显示=======================================
+通过 jQuery，您可以使用 hide() 和 show() 方法来隐藏和显示 HTML 元素：
+
+    $("#hide").click(function(){
+        $("p").hide();
+    });
+    
+    $("#show").click(function(){
+        $("p").show();
+    });
+
+    可选的 speed 参数规定隐藏/显示的速度，可以取以下值："slow"、"fast" 或毫秒。
+    可选的 callback 参数是隐藏或显示完成后所执行的函数名称。
+    语法:
+    $(selector).hide(speed,callback);
+    $(selector).show(speed,callback);
+
+    下面的例子演示了带有 speed 参数的 hide() 方法：
+
+    $("button").click(function(){
+        $("p").hide(1000);
+    });
+
+jQuery toggle()，您可以使用 toggle() 方法来切换 hide() 和 show() 方法。
+    语法:(显示被隐藏的元素，并隐藏已显示的元素)
+    $(selector).toggle(speed,callback);
+
+    $("button").click(function(){
+        $("p").toggle();
+    });
+
+.parent() 與 .parents() 與 .closest() 的差異
+    結論：
+    parent() 只往上查找一層
+    closest() 往上查找 只要找到符合條件的 就停止
+    parents() 往上查找 不停止 找出所有符合條件的
+
+===============================淡入淡出=======================================
+
+jQuery Fading 方法 通过 jQuery，您可以实现元素的淡入淡出效果。
+jQuery 拥有下面四种 fade 方法：
+    1.fadeIn()
+    2.fadeOut()
+    3.fadeToggle()
+    4.fadeTo()
+
+jQuery fadeIn() 用于淡入已隐藏的元素。
+    语法:
+    $(selector).fadeIn(speed,callback);
+
+jQuery fadeOut() 方法用于淡出可见元素。
+    语法:
+    $(selector).fadeOut(speed,callback);
+
+jQuery fadeToggle() 方法可以在 fadeIn() 与 fadeOut() 方法之间进行切换。
+    如果元素已淡出，则 fadeToggle() 会向元素添加淡入效果。
+    如果元素已淡入，则 fadeToggle() 会向元素添加淡出效果。
+    语法:
+    $(selector).fadeToggle(speed,callback);
+
+jQuery fadeTo() 方法允许渐变为给定的不透明度（值介于 0 与 1 之间）。
+    语法:
+    $(selector).fadeTo(speed,opacity,callback);
+
+===============================滑動=======================================
+jQuery 滑动方法 通过 jQuery，您可以在元素上创建滑动效果。
+jQuery 拥有以下滑动方法：
+    1.slideDown()
+    2.slideUp()
+    3.slideToggle()
+
+jQuery slideDown() 方法用于向下滑动元素。
+    语法:
+    $(selector).slideDown(speed,callback);
+
+jQuery slideUp() 方法用于向上滑动元素。
+    语法:
+    $(selector).slideUp(speed,callback);
+
+jQuery slideToggle() 方法 可以在 slideDown() 与 slideUp() 方法之间进行切换。
+    如果元素向下滑动，则 slideToggle() 可向上滑动它们。
+    如果元素向上滑动，则 slideToggle() 可向下滑动它们。
+    语法:
+    $(selector).slideToggle(speed,callback);
+
+===============================動畫=======================================
+
+jQuery animate() 方法允许您创建自定义的动画。
+jQuery animate() 方法用于创建自定义动画。
+
+    语法：
+    $(selector).animate({params},speed,callback);
+
+    必需的 params 参数定义形成动画的 CSS 属性。
+
+它把 <div> 元素往右边移动了 250 像素：
+    $("button").click(function(){
+        $("div").animate({left:'250px'});
+    });
+
+生成动画的过程中可同时使用多个属性：
+    $("button").click(function(){
+        $("div").animate({
+            left:'250px',
+            opacity:'0.5',
+            height:'150px',
+            width:'150px'
+        });
+    });
+
+可以定义相对值（该值相对于元素的当前值）。需要在值的前面加上 += 或 -=：
+    $("button").click(function(){
+        $("div").animate({
+            left:'250px',
+            height:'+=150px',
+            width:'+=150px'
+        });
+    });
+
+您甚至可以把属性的动画值设置为 "show"、"hide" 或 "toggle"：
+    $("button").click(function(){
+        $("div").animate({
+            height:'toggle'
+        });
+    });
+
+jQuery animate() - 使用队列功能
+jQuery 会创建包含这些方法调用的"内部"队列。然后逐一运行 animate 调用。
+    $("button").click(function(){
+        var div=$("div");
+        div.animate({height:'300px',opacity:'0.4'},"slow");
+        div.animate({width:'300px',opacity:'0.8'},"slow");
+        div.animate({height:'100px',opacity:'0.4'},"slow");
+        div.animate({width:'100px',opacity:'0.8'},"slow");
+    });
+
+把 <div> 元素往右边移动了 100 像素，然后增加文本的字号：
+    $("button").click(function(){
+        var div=$("div");
+        div.animate({left:'100px'},"slow");
+        div.animate({fontSize:'3em'},"slow");
+    });
+
+jQuery stop() 方法用于停止动画或效果，在它们完成之前。
+              方法包括：滑动、淡入淡出和自定义动画。
+    语法:
+    $(selector).stop(stopAll,goToEnd);
+
+    可选的 stopAll 参数规定是否应该清除动画队列。(默认是 false)
+    即仅停止活动的动画，允许任何排入队列的动画向后执行。
+    可选的 goToEnd 参数规定是否立即完成当前动画。(默认是 false)
+    因此，默认地，stop() 会清除在被选元素上指定的当前动画。
+
+可以用 animate() 方法来操作所有 CSS 属性吗？
+    是的，几乎可以！不过，需要记住一件重要的事情：
+    当使用 animate() 时，必须使用 Camel 标记法书写所有的属性名，比如：
+    使用 paddingLeft 而不是 padding-left，
+    使用 marginRight 而不是 margin-right，等等。
+    同时，色彩动画并不包含在核心 jQuery 库中。
+    如果需要生成颜色动画，您需要从 jquery.com 下载 颜色动画 插件。
+
+==============================Callback 方法=====================================
+
+Callback 函数在当前动画 100% 完成之后执行。
+以下实例在隐藏效果完全实现后回调函数:
+
+使用 callback 实例
+    $("button").click(function(){
+      $("p").hide("slow",function(){
+        alert("段落现在被隐藏了");
+      });
+    });
+
+以下实例没有回调函数，警告框会在隐藏效果完成前弹出：
+
+没有 callback(回调)
+    $("button").click(function(){
+      $("p").hide(1000);
+      alert("段落现在被隐藏了");
+    });
+
+===============================鏈(Chaining)=======================================
+
+Chaining 允许我们在一条语句中运行多个 jQuery 方法（在相同的元素上）。
+提示： 这样的话，浏览器就不必多次查找相同的元素。
+如需链接一个动作，您只需简单地把该动作追加到之前的动作上。
+
+    下面的例子把 css()、slideUp() 和 slideDown() 链接在一起。
+    "p1" 元素首先会变为红色，然后向上滑动，再然后向下滑动：
+
+    $("#p1").css("color","red").slideUp(2000).slideDown(2000);
+
+    您可以按照希望的格式来写，包含换行和缩进。如下书写也可以很好地运行：
+
+    $("#p1").css("color","red")
+      .slideUp(2000)
+      .slideDown(2000);

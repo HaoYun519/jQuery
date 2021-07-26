@@ -1,0 +1,127 @@
+======================================AJAX 简介===========================================================================
+ 
+AJAX 即「Asynchronous JavaScript and XML」（非同步的JavaScript與XML技術）
+AJAX 是与服务器交换数据的技术，它在不重载全部页面的情况下，实现了对部分网页的更新。
+
+关于 jQuery 与 AJAX
+jQuery 提供多个与 AJAX 有关的方法。
+通过 jQuery AJAX 方法，您能够使用 HTTP Get 和 HTTP Post 从远程服务器上
+请求文本、HTML、XML 或 JSON - 同时您能够把这些外部数据直接载入网页的被选元素中。
+
+如果没有 jQuery，AJAX 编程还是有些难度的。
+编写常规的 AJAX 代码并不容易，因为不同的浏览器对 AJAX 的实现并不相同。
+这意味着您必须编写额外的代码对浏览器进行测试。
+不过，jQuery 团队为我们解决了这个难题，我们只需要一行简单的代码，就可以实现 AJAX 功能。
+
+======================================AJAX load()===========================================================================
+
+jQuery load() 方法从服务器加载数据，并把返回的数据放入被选元素中。
+语法:
+    $(selector).load(URL,data,callback);
+
+必需的 URL 参数规定您希望加载的 URL。
+可选的 data 参数规定与请求一同发送的查询字符串键/值对集合。
+可选的 callback 参数是 load() 方法完成后所执行的函数名称。
+
+example（"demo_test.txt"）的内容：
+
+    <h2>jQuery AJAX 是个非常棒的功能！</h2>
+    <p id="p1">这是段落的一些文本。</p>
+
+下面的例子会把文件 "demo_test.txt" 的内容加载到指定的 <div> 元素中：
+
+    $("#div1").load("demo_test.txt");
+
+下面的例子把 "demo_test.txt" 文件中 id="p1" 的元素的内容，加载到指定的 <div> 元素中：
+
+    $("#div1").load("demo_test.txt #p1");
+
+可选的 callback 参数规定当 load() 方法完成后所要允许的回调函数。
+回调函数可以设置不同的参数：
+
+    responseTxt - 包含调用成功时的结果内容
+    statusTXT - 包含调用的状态
+    xhr - 包含 XMLHttpRequest 对象
+
+下面的例子会在 load() 方法完成后显示一个提示框。
+如果成功，则显示"外部内容加载成功！"，
+如果失败，则显示错误消息：
+
+    $("button").click(function(){
+      $("#div1").load("demo_test.txt",function(responseTxt,statusTxt,xhr){
+        if(statusTxt=="success")
+          alert("外部内容加载成功!");
+        if(statusTxt=="error")
+          alert("Error: "+xhr.status+": "+xhr.statusText);
+      });
+    });
+
+=====================================AJAX get() 和 post() 方法================================================================
+
+jQuery get() 和 post() 方法用于通过 HTTP GET 或 POST 请求从服务器请求数据。
+
+HTTP 请求：GET vs. POST
+两种在客户端和服务器端进行请求-响应的常用方法是：GET 和 POST。
+
+GET - 从指定的资源请求数据
+POST - 向指定的资源提交要处理的数据
+
+GET 基本上用于从服务器获得（取回）数据。注释：GET 方法可能返回缓存数据。
+POST 也可用于从服务器获取数据。不过，POST 方法不会缓存数据，并且常用于连同请求一起发送数据。
+
+jQuery $.get() 方法通过 HTTP GET 请求从服务器上请求数据。
+语法：
+    $.get(URL,callback);
+
+必需的 URL 参数规定您希望请求的 URL。
+可选的 callback 参数是请求成功后所执行的函数名。
+
+下面的例子使用 $.get() 方法从服务器上的一个文件中取回数据：
+
+    $("button").click(function(){
+      $.get("demo_test.php",function(data,status){
+        alert("数据: " + data + "\n状态: " + status);
+      });
+    });
+
+    解析：
+    $.get() 的第一个参数是我们希望请求的 URL（"demo_test.php"）。
+    第二个参数是回调函数。第一个回调参数存有被请求页面的内容，第二个回调参数存有请求的状态。
+
+jQuery $.post() 方法通过 HTTP POST 请求向服务器提交数据。
+语法:
+    $.post(URL,data,callback);
+
+必需的 URL 参数规定您希望请求的 URL。
+可选的 data 参数规定连同请求发送的数据。
+可选的 callback 参数是请求成功后所执行的函数名。
+
+下面的例子使用 $.post() 连同请求一起发送数据：
+
+    $("button").click(function(){
+        $.post("/try/ajax/demo_test_post.php",
+        {
+            name:"菜鸟教程",
+            url:"http://www.runoob.com"
+        },
+        function(data,status){
+            alert("数据: \n" + data + "\n状态: " + status);
+        });
+    });
+
+    解析：
+    $.post() 的第一个参数是我们希望请求的 URL ("demo_test_post.php")。
+    然后我们连同请求（name 和 url）一起发送数据。
+    "demo_test_post.php" 中的 PHP 脚本读取这些参数，对它们进行处理，然后返回结果。
+    第三个参数是回调函数。第一个回调参数存有被请求页面的内容，而第二个参数存有请求的状态。
+
+提示： 这个 PHP 文件 ("demo_test_post.php") 类似这样：
+    demo_test_post.php 文件代码:
+
+    <?php
+    $name = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
+    $url = isset($_POST['url']) ? htmlspecialchars($_POST['url']) : '';
+    echo '网站名: ' . $name;
+    echo "\n";
+    echo 'URL 地址: ' .$url;
+    ?>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+
+    <div class="selected">
+        123
+        <div class="selected">
+          <div>
+            <p>Hello Again</p>
+          </div>
+        </div>
+    </div>
+
+<script>
+//   如果是 .parent() 會發現 沒有變色
+// $("p").parent(".selected").css("background", "yellow");
+
+// 如果是 .closest() 會發現 123 沒有變色 但 Hello Again 變色了
+// $("p").closest(".selected").css("background", "yellow");
+
+// 如果是 .parents() 會發現 123 跟 Hello Again 都變色了
+$("p").parents(".selected").css("background", "yellow");
+
+</script>
+</body>
+</html>
+
+<!-- 
+[jQuery] .parent() 與 .parents() 與 .closest() 的差異
+
+結論：
+parent() 只往上查找一層
+closest() 往上查找 只要找到符合條件的 就停止
+parents() 往上查找 不停止 找出所有符合條件的 -->
