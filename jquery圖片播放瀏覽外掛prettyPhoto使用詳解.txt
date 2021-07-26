@@ -1,0 +1,105 @@
+一、prettyPhoto簡介
+
+1
+
+prettyPhoto是一款基於jquery的輕量級的lightbox圖片播放瀏覽外掛，它不僅支援圖片，還同時支援視訊、flash、YouTube、iframe和ajax。而且prettyPhoto配置和使用都十分簡單，擴充套件性也不錯，你可以最大限度地自定義prettyPhoto。目前，prettyPhoto相容大部分主流的瀏覽器，包括令人糾結的IE6。
+
+prettyPhoto外掛的專案地址：http://www.no-margin-for-errors.com/projects/prettyphoto-jquery-lightbox-clone/
+
+建議英文好的朋友直接去官網上了解這個外掛的用法，如果你的英文很爛，那麼也別急，下面我就給大家來一一介紹prettyPhoto的使用方法。
+
+二、prettyPhoto使用方法介紹
+
+1、引入jquery核心庫和prettyPhoto外掛庫以及prettyPhoto樣式表檔案
+
+複製程式碼 程式碼如下:
+<script src=”js/jquery.js” type=”text/javascript” charset=”utf-8″></script>
+<link rel=”stylesheet” href=”css/prettyPhoto.css” type=”text/css” media=”screen” charset=”utf-8″ />
+<script src=”js/jquery.prettyPhoto.js” type=”text/javascript” charset=”utf-8″></script>
+
+2、初始化jquery外掛，以下是最簡單的配置的js程式碼
+
+複製程式碼 程式碼如下:
+$(document).ready(function(){
+    $(“a[rel^=’prettyPhoto’]”).prettyPhoto();
+});
+
+下面是每種型別的html程式碼
+
+1、單張圖片
+
+複製程式碼 程式碼如下:
+<a href=”images/fullscreen/2.jpg” rel=”prettyPhoto” title=”This is the description”>
+<img src=”images/thumbnails/t_2.jpg” width=”60″ height=”60″ alt=”This is the title” />
+</a>
+
+2、圖片相簿
+
+複製程式碼 程式碼如下:
+<a href=”images/fullscreen/1.jpg” rel=”prettyPhoto[pp_gal]” title=”You can add caption to pictures.”>
+<img src=”images/thumbnails/t_1.jpg” width=”60″ height=”60″ alt=”Red round shape” />
+</a>
+<a href=”images/fullscreen/2.jpg” rel=”prettyPhoto[pp_gal]”>
+<img src=”images/thumbnails/t_2.jpg” width=”60″ height=”60″ alt=”Nice building” />
+</a>
+<a href=”images/fullscreen/3.jpg” rel=”prettyPhoto[pp_gal]”>
+<img src=”images/thumbnails/t_3.jpg” width=”60″ height=”60″ alt=”Fire!” />
+</a>
+<a href=”images/fullscreen/4.jpg” rel=”prettyPhoto[pp_gal]”>
+<img src=”images/thumbnails/t_4.jpg” width=”60″ height=”60″ alt=”Rock climbing” />
+</a>
+<a href=”images/fullscreen/5.jpg” rel=”prettyPhoto[pp_gal]”>
+<img src=”images/thumbnails/t_5.jpg” width=”60″ height=”60″ alt=”Fly kite, fly!” />
+</a>
+
+3、單個flash
+
+複製程式碼 程式碼如下:
+<a href=”http://www.adobe.com/products/flashplayer/include/marquee/design.swf?width=792&height=294”
+rel=”prettyPhoto[flash]” title=”Flash 10 demo”>
+<img src=”images/thumbnails/flash-logo.jpg” alt=”Flash 10 demo” width=”60″ />
+</a>
+
+4、YouTube視訊
+
+複製程式碼 程式碼如下:
+<a href=”http://www.youtube.com/watch?v=qqXi8WmQ_WM” rel=”prettyPhoto” title=””>
+<img src=”images/thumbnails/flash-logo.jpg” alt=”YouTube” width=”60″ />
+</a>
+
+5、Vimeo
+
+複製程式碼 程式碼如下:
+<a href=”http://vimeo.com/8245346” rel=”prettyPhoto” title=””> <img src=”images/thumbnails/flash-logo.jpg” alt=”YouTube” width=”60″ /> </a>
+
+6、QuickTime影片
+
+複製程式碼 程式碼如下:
+<a title=”Despicable Me” rel=”prettyPhoto[movies]” href=”http://trailers.apple.com/movies/universal/despicableme/despicableme-tlr1_r640s.mov?width=640&height=360“> <img src=”/wp-content/themes/NMFE/images/thumbnails/quicktime-logo.png” alt=”Despicable Me” width=”50″ /> </a> <a title=”Tales from Earthsea” rel=”prettyPhoto[movies]” href=”http://trailers.apple.com/movies/disney/talesfromearthsea/talesfromearthsea-tlr1_r640s.mov?width=640&height=340“> <img src=”/wp-content/themes/NMFE/images/thumbnails/quicktime-logo.png” alt=”Tales from Earthsea” width=”50″ /> </a> <a title=”Grease Sing-A-Long” rel=”prettyPhoto[movies]” href=”http://trailers.apple.com/movies/paramount/greasesingalong/greasesingalong-tlr1_r640s.mov?width=640&height=272“> <img src=”/wp-content/themes/NMFE/images/thumbnails/quicktime-logo.png” alt=”Grease Sing-A-Long” width=”50″ /> </a>
+
+7、外部網站（iframe）
+
+複製程式碼 程式碼如下:
+<a href=”http://www.google.com?iframe=true&width=100%&height=100%”
+rel=”prettyPhoto[iframes]” title=”Google.com opened at 100%”>Google.com</a>
+<a href=”http://www.apple.com?iframe=true&width=500&height=250” rel=”prettyPhoto[iframes]”>Apple.com</a>
+<a href=”http://www.twitter.com?iframe=true&width=400&height=200” rel=”prettyPhoto[iframes]”>Twitter.com</a>
+
+8、普通文字
+
+複製程式碼 程式碼如下:
+<a href=”#inline-1″ rel=”prettyPhoto” ><img src=”/wp-content/themes/NMFE/images/thumbnails/earth-logo.jpg” alt=”” width=”50″ /></a>
+<div id=”inline-1″ class=”hide”>
+    <p>這裡是普通的文字</p>
+    <p>今天給大家介紹的prettyPhoto希望大家能喜歡，這個是播放普通文字的html</p>
+</div>
+
+9、AJAX內容
+
+複製程式碼 程式碼如下:
+<a rel=”prettyPhoto[ajax]” href=”/demos/prettyPhoto-jquery-lightbox-clone/xhr_response.html?
+ajax=true&width=325&height=185″>Ajax content</a>
+
+三、總結
+
+prettyBox圖片播放外掛很好用，趕緊用它來打造你的專屬相簿吧！
